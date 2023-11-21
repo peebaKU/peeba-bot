@@ -5,6 +5,9 @@ import { Queue } from "queue-typescript"
 const Gtts = require('gtts')
 
 export class SongQueue {
+    static addSong(song: any) {
+        throw new Error("Method not implemented.");
+    }
     guildId: Snowflake;
     audioPlayer: AudioPlayer | undefined
     songList: Song[] = []

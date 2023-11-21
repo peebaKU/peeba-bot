@@ -1,5 +1,5 @@
 import { Snowflake, TextChannel } from "discord.js";
-import { QueueManager } from "src/Bot";
+import { QueueManager } from "../index";
 
 
 

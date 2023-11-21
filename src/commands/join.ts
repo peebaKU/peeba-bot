@@ -1,13 +1,12 @@
 import { Client, GuildMember, Message } from "discord.js";
-import {joinVoiceChannel, getVoiceConnection, VoiceConnectionStatus, createAudioResource} from "@discordjs/voice"
+import {joinVoiceChannel, getVoiceConnection, VoiceConnectionStatus} from "@discordjs/voice"
 import { queueManager } from "../index";
 import { SongQueue } from "../libs/SongQueue";
-import { setTimeout } from "timers";
 
 
 module.exports = async (client: Client, requester: GuildMember, message: Message | undefined): Promise<void> => {
 
-    const resource = createAudioResource('rct.mp3')
+    
     if(!requester.voice.channel){
         if(message != undefined){await message.channel.send({content: "You are not in any voice channel!"})}
         return 
@@ -24,13 +23,8 @@ module.exports = async (client: Client, requester: GuildMember, message: Message
         adapterCreator: requester.guild.voiceAdapterCreator,
         selfDeaf: false
     })
-    
+
     queueManager[requester.guild.id] = new SongQueue(requester.guild.id, voiceConnection)
-    setTimeout(()=>{
-        const player = queueManager[requester.guild.id].audioPlayer
-        voiceConnection.subscribe(player!)
-        queueManager[requester.guild.id].audioPlayer?.play(resource)
-    },200)
     
     voiceConnection.on(VoiceConnectionStatus.Disconnected, () => {
         console.log("Bot disconnected!")
