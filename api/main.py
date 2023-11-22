@@ -18,6 +18,5 @@ def read_items():
 def update_vulgar(item:User):
     check_user = check_users(item)
     if(check_user):
-        print("66666")
         return  insert_user({"user_id":item.user_id,"name":item.name,"vulgar_words_count":1})
     return update_user(item.user_id,item.vulgar_words_count)
