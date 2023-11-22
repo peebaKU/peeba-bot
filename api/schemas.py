@@ -10,3 +10,8 @@ class User(BaseModel):
     user_id:str
     name:str
     vulgar_words_count:UserUpdateBody
+
+class UserCreate(BaseModel):
+    user_id:str
+    name:str
+    vulgar_words_count:int
