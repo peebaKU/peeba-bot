@@ -23,7 +23,7 @@ def read_history():
     for i in his_col.find():
         i.pop("_id")
         list_history.append(i)
-    return list_history
+    return {"items":list_history}
 
 
 def check_users(item:User):
