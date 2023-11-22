@@ -64,11 +64,15 @@ client.on(SpeechEvents.speech, async (msg: voiceMessage) => {
         require("./commands/play")(client, msg.member, songName, undefined, queueManager)
     }
     else if(msg.content.includes("*")) {
+        console.log(msg.author.username);
         axios.patch("http://localhost:8000/update",
         { 
-        "user_id": msg.author.id, 
+        "user_id": msg.author.id,
         "name": msg.author.username,
-        "vulgar_words_count":1}
+        "vulgar_words_count":{
+            "operation" : "increment",
+            "value"  : 1
+        }}
         )      
     }
     else if (msg.content.startsWith("ผีบ้าออกไป")) {
